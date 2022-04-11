@@ -25,15 +25,15 @@ for (let i = 0; i < products.length-1; i++) {
      
     if (products[i].price <= 100) {
 		productsToSum.push(products[i].price)
-        console.log(`${products[i].product} " - Range: 0 - 100"`);
+        console.log(`${products[i].product} " - Cheap"`);
       
      }else if (products[i].price >= 100 && products[i].price <= 500) {
 		productsToSum.push(products[i].price)
-		console.log(`${products[i].product} " - Range: 0 - 500"`);
+		console.log(`${products[i].product} " - Normal price"`);
 		
 	 }else if (products[i].price >= 500 && products[i].price <= 3000) {
 		productsToSum.push(products[i].price)
-		console.log(`${products[i].product} " - Range: 500 - 3000"`);
+		console.log(`${products[i].product} " - Expensives"`);
 	 }else{
 		productsToSum.push(products[i].price)
 		console.log(`${products[i].product} " - Range: Very-Expensive-product"`);
