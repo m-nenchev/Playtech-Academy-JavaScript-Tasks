@@ -18,30 +18,30 @@ let products = [
     let productsTo500 = [];
 	let productsTo3000 = [];
 	let productsToVeryExpensive = [];
-	let productsTotalAmount =[];
+	let productsTotalAmount = 0;
 	let productsToSum =[];
 
 for (let i = 0; i < products.length-1; i++) {
      
     if (products[i].price <= 100) {
 		productsToSum.push(products[i].price)
-        console.log(`${products[i].product} " - Cheap"`);
-      
+                console.log(`${products[i].product} " - Cheap"`);
+                productsTotalAmount += products[i].price
      }else if (products[i].price >= 100 && products[i].price <= 500) {
 		productsToSum.push(products[i].price)
 		console.log(`${products[i].product} " - Normal price"`);
-		
+		productsTotalAmount += products[i].price
 	 }else if (products[i].price >= 500 && products[i].price <= 3000) {
 		productsToSum.push(products[i].price)
 		console.log(`${products[i].product} " - Expensives"`);
+		productsTotalAmount += products[i].price
 	 }else{
 		productsToSum.push(products[i].price)
 		console.log(`${products[i].product} " - Range: Very-Expensive-product"`);
+		productsTotalAmount += products[i].price
 	 }
      
 }
-
-productsTotalAmount = productsToSum.reduce(function(acum,current){return acum + current},0)
 console.log(`"Total amount -" ${productsTotalAmount}`);
 
 
