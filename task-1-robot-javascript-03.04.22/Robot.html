@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Factory</title>
+
+    
+    <link rel="stylesheet" href="style.css">
+
+   </head>
+
+    <header class="header-title-robot-factory">
+        <div class="titles">
+          <h2 class="title-robot">Robot Factory</h2>
+            <a class="img-playtech" href="https://www.playtech.com/"><img class="img-playtech" src="C:\Users\Dell\Downloads\PTWebAcademy.JPG" alt="Trulli" width="50" height="33"></a>
+        </div>
+    </header>
+
+<body class="body">
+   
+  <section id="slide-1" class="factory-section">
+    <h1 class="basic-robot-title">Basic Robot</h1>
+    
+    <form class="content-wrapper">
+        
+        <div class="robot"> 
+            <p id="textRobot"></p>
+            <img class="img-robot-head" src="C:\Users\Dell\OneDrive\Работен плот\tasks\robot\head1.jpg" alt="">
+            <img class="img-body-robot" src="C:\Users\Dell\OneDrive\Работен плот\tasks\robot\body-robot.png" alt="">
+            <img class="img-hand-robot" src="C:\Users\Dell\OneDrive\Работен плот\tasks\robot\hand.jpg" alt="">
+            <img class="img-hand-robot-2" src="C:\Users\Dell\OneDrive\Работен плот\tasks\robot\hand.jpg" alt="">
+            <img class="img-leg-robot" src="C:\Users\Dell\OneDrive\Работен плот\tasks\robot\leg.jpg" alt="">
+            <img class="img-leg-robot-2" src="C:\Users\Dell\OneDrive\Работен плот\tasks\robot\leg.jpg" alt="">
+            <img class="img-mouth-robot" src="C:\Users\Dell\OneDrive\Работен плот\tasks\robot\mouth.jpg" alt="">
+            <h4 class="title-robot1">Robot name</h4>
+        </div>
+          
+           <div class="text-wrap">
+
+              <p class="text1"><b>P</b>skskdsds hk hkgh rt et ttere errer erre rer reerrer rererr rerrr rererr errrer errrererr rerrere errrer errrer rerrer ererre errere rer errer rerr errer erre er eer er eredksjdk tyty yttyyt tyty tyytty dfd dsdsdsds sdsdsd sdsdsd</p>
+              <p class="text2">Bdsds  dssdsdsd sddsdsd sd sderrh fgrt eerer  ererrtr erre e r err </p>
+              <p class="text3">
+                 <img class="image-text3" src="C:\Users\Dell\Downloads\good luck.jpg" alt="no image">sdsdsd dssdsd ddsds
+              </p>
+    
+           </div>
+        </form>
+
+    </section>
+    
+    <section id="slide-2" class="factory-section-2">
+        <div class="content-wrapper-2">
+            <h2 class="create-robot-title">Create Robot</h2>
+            <hr class="solid">
+        </div>
+        
+        <form id="formAtribut" class="form">
+            
+            <span class="span-name-input">
+              <label class="label-name" for="name">Name:</label>
+              <span class="errorInputName"></span>
+              <input class="input-name" type="text" id="name" name="name" placeholder="Robot name">
+            </span>
+          
+        <span class="span-select-tayp">
+            <label class="label-select-tayp" for="select-type">Type Robot</label>
+            <span class="errorSelectTayp"></span>
+            <select  class="select-tayp-selector" name="select-type"  >
+                <option class="empty-space" disabled selected value style="display:none"></option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+
+        </span>
+        
+        <span class="span-input-selector-color">
+            <label class="label-selector-color" for="select-color">Select Color</label>
+            <span class="errorSelectColor"></span>
+            <input class="input-selector-color" type="color" id="select-color" name="select-color" value="#e96126">
+        </span> 
+
+        <span class="checkbox-wrapper">
+                  <label for="robot">Select options</label>
+                  <span class="error"></span>
+               <input class="input-checkbox-jump" type="checkbox" name="robot" value="jump">
+                  <label for="robot">can jump</label><br>
+
+               <input onChange="onChangeTextArea(this)" class="input-checkbox-talk" type="checkbox" name="robotChek" value="talk">
+                  <label for="robot"> can talk</label><br>
+
+               <input type="checkbox" name="robot" value="blink" >
+                  <label for="robot"> can blink</label><br>
+        </span>
+           
+        <span class="textarea-wrapper">
+            <label for="text-area">Phrase</label>
+            <span class="errorTextArea"></span>
+            <textarea disabled="true" class="textarea" name="text-area" id="text-area" cols="10" rows="10"></textarea>
+        </span>
+        
+        </form >
+            
+           <button type="submit" form="formAtribut" value="Submit" class="create-botton">Create</button>
+           <button class="show-created-robots-button">Show Created Robots</button>
+        <hr class="solid">
+  </section>
+    <script>
+
+        let classes = (classes) => document.querySelector(classes);
+
+       // Const  for validating instance variables 
+
+        const form = classes(".form");
+        const name = classes("input[name='name']");
+        const selectEmptySpace = classes(".select-tayp-selector");
+        const colorInput = classes(".input-selector-color");
+        const phrase = classes("textarea");
+        const checkboxCheck = classes("input[name='robotChek']");
+        const errorMsgInputName = classes(".errorInputName");
+        const errorMsgSelectTayp = classes(".errorSelectTayp");
+        const errorMsgSelectColor = classes(".errorSelectColor");
+        const errorTextArea = classes(".errorTextArea")
+
+        // Verification function phrase is cheked
+        function onChangeTextArea(checkboxCheck){
+            phrase.disabled = checkboxCheck.checked ? false : true;
+           
+            }
+
+         // Event listener on button name:"create" 
+           form.addEventListener("submit", (e) => {
+                e.preventDefault();
+            
+               validateFormNameAlert(name,"Name can't be blank");
+               validateFormSelectAlert(selectEmptySpace,"Please choose the type");
+               validateFormInputColorAlert(colorInput,"Choose color")
+               validateFormChekboxAlert(phrase,checkboxCheck,"Can't be blank")
+            // variable receive data robot object  :
+                   let robotObject = [{}];
+
+                       robotObject = {name:`${name.value}`,
+                       tayp:`${selectEmptySpace.value}`,
+                       color:`${colorInput.value}`,
+                       phrase:`${ phrase.value}`
+                       }
+            });
+
+         //   Validate alert composition:  
+         let validateFormNameAlert = (clas,mesage)=>{
+                if ( clas.value.trim() == ""){
+                    errorMsgInputName.textContent= mesage;
+                    clas.style.border = "2px solid red";
+                }else{
+                    errorMsgInputName.textContent= "";
+                    clas.style.border = "2px solid green";
+                }
+            }
+        
+        let validateFormSelectAlert = (clas,mesage)=>{
+            if (clas.value == "") {
+                errorMsgSelectTayp.textContent = mesage; 
+                clas.style.border = "2px solid red";
+            }else{
+                errorMsgSelectTayp.textContent = ""
+                    clas.style.border = "2px solid green";
+                }
+        }
+
+        let validateFormInputColorAlert = (clas,mesage)=>{
+            if (clas.value == "#e96126") {
+                errorMsgSelectColor.textContent = mesage;
+                clas.style.border = "2px solid red";
+            }else{
+                errorMsgSelectColor.textContent="";
+                clas.style.border = "2px solid green";
+                }
+        }
+
+        let validateFormChekboxAlert =(clas,checkbox,mesage)=>{
+            if (checkbox.checked && clas.value=="") {
+                errorTextArea.textContent = mesage;
+                clas.style.border = "2px solid red";
+            }  
+        }
+      
+        
+    </script>
+    
+   
+
+</body> 
+</html>
