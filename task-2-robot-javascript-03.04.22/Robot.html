@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Factory</title>
+
+    
+    <link rel="stylesheet" href="style.css">
+
+   </head>
+
+    <header class="header-title-robot-factory">
+        <div class="titles">
+          <h2 class="title-robot">Robot Factory</h2>
+            <a class="img-playtech" href="https://www.playtech.com/"><img class="img-playtech" src="C:\Users\Dell\Downloads\PTWebAcademy.JPG" alt="Trulli" width="50" height="33"></a>
+        </div>
+    </header>
+
+<body class="body">
+   
+  <section id="slide-1" class="factory-section">
+    <h1 class="basic-robot-title">Basic Robot</h1>
+    
+    <form class="content-wrapper">
+        
+        <div class="robot"> 
+            
+            <p id="textRobot"></p>
+           
+            </div>
+          
+           <div class="text-wrap">
+
+              
+           
+            
+                 
+              
+    
+           </div>
+        </form>
+
+    </section>
+    
+    <section id="slide-2" class="factory-section-2">
+        <div class="content-wrapper-2">
+            <h2 class="create-robot-title">Create Robot</h2>
+            <hr class="solid">
+        </div>
+        
+        <form id="formAtribut" class="form">
+            
+            <span class="span-name-input">
+              <label class="label-name" for="name">Name:</label>
+              <span class="errorInputName"></span>
+              <input class="input-name" type="text" id="name" name="name" placeholder="Robot name">
+            </span>
+          
+        <span class="span-select-tayp">
+            <label class="label-select-tayp" for="select-type">Type Robot</label>
+            <span class="errorSelectTayp"></span>
+            <select  class="select-tayp-selector" name="select-type"  >
+                <option class="empty-space" disabled selected value style="display:none"></option>
+                <option value="male">male</option>
+                <option value="female">female</option>
+            </select>
+
+        </span>
+        
+        <span class="span-input-selector-color">
+            <label class="label-selector-color" for="select-color">Select Color</label>
+            <span class="errorSelectColor"></span>
+            <input class="input-selector-color" type="color" id="select-color" name="select-color" value="#e96126">
+        </span> 
+
+        <span class="checkbox-wrapper">
+                  <label for="robot">Select options</label>
+                  <span class="error"></span>
+               <input class="input-checkbox-jump" type="checkbox" name="robot" value="jump">
+                  <label for="robot">can jump</label><br>
+
+               <input onChange="onChangeTextArea(this)" class="input-checkbox-talk" type="checkbox" name="robotChek" value="talk">
+                  <label for="robot"> can talk</label><br>
+
+               <input type="checkbox" name="robot" value="blink" >
+                  <label for="robot"> can blink</label><br>
+        </span>
+           
+        <span class="textarea-wrapper">
+            <label for="text-area">Phrase</label>
+            <span class="errorTextArea"></span>
+            <textarea disabled="true" class="textarea" name="text-area" id="text-area" placeholder="Comment text..." cols="10" rows="10"></textarea>
+        </span>
+        
+        </form >
+            
+           <button type="submit" name="create" form="formAtribut" value="Submit" class="create-botton">Create</button>
+           <button class="show-created-robots-button">Show Created Robots</button>
+        <hr class="solid">
+  </section>
+
+    <script>
+        let classes = (classes) => document.querySelector(classes);
+    // Const  for validating instance variables 
+        const form = classes(".form"),
+              name = classes("input[name='name']"),
+              selectEmptySpace = classes(".select-tayp-selector"),
+              colorInput = classes(".input-selector-color"),
+              phrase = classes("textarea"),
+              checkboxCheck = classes("input[name='robotChek']"),
+              errorMsgInputName = classes(".errorInputName"),
+              errorMsgSelectTayp = classes(".errorSelectTayp"),
+              errorMsgSelectColor = classes(".errorSelectColor"),
+              errorTextArea = classes(".errorTextArea")
+       
+    // Const  for robot createlement instance variables   
+        const sections = document.querySelector(".robot"),
+              divTextWraper = document.querySelector(".text-wrap"),
+              divRobotHead = document.createElement("div"),
+              divRobotEyeLeft = document.createElement("div"),
+              divRobotEyeRight = document.createElement("div"),
+              divRobotMouth = document.createElement("div"),
+              divRobotMouthSpeak = document.createElement("div"),
+              divRobotBody = document.createElement("div"),
+              divfemaleRobotShelf = document.createElement("div"),
+              divRobotHandLeft = document.createElement("div"),
+              divRobotHandRight = document.createElement("div"),
+              divRobotLegLeft = document.createElement("div"),
+              divRobotLegRight = document.createElement("div"),
+              hRobotTitle = document.createElement("h4"),
+              pRobotRibon = document.createElement("p"),
+              robotParagraphOne = document.createElement("p"),
+              robotParagraphTwo = document.createElement("p"),
+              robotParagraphThree = document.createElement("p"),
+              robotImgInParagraph = document.createElement("img")
+              
+               
+
+
+     // Function for createElement robot title         
+        function createElementRobotTitle(element,classNames,title){
+                 element.setAttribute("class",classNames);
+                 element.textContent = title;
+        }
+    
+        function creatElementRobotPhrase(element,classNames,phrase){
+            element.setAttribute("class",classNames);
+            element.textContent = phrase;
+        }
+    // Function for createElement robot body male   
+        function divCreateElementRobotBody(element,classNames,color){
+                element.setAttribute("class",classNames);
+                element.setAttribute("style",`border-top: 63px solid${color};`)
+        }
+       
+        function divCreatElementfamaleRobotShelf(element,classNames,color){
+            element.setAttribute("class",classNames);
+            element.setAttribute("style",`border-bottom: 34px solid ${color};`)
+        }
+    // Function for createElement robot     
+        function divCreateElementRobot(element,classNames,color){
+                 element.setAttribute("class",classNames);
+                 element.setAttribute("style",`background-color:${color};`)
+              }
+          
+        function  creatElementParagraphs(element,classNames,title){
+            element.setAttribute("class",classNames);
+            element.textContent = title
+        }     
+    /* Function for data dynamic entry in all functions above: divCreateElementRobot,
+     divCreateElementRobotBody, createElementRobotTitle,creatElementRobotPhrase, creatElementParagraphs */        
+        function robotSlectionElementData(colorRobot,colorRobotBody,titleRobotName,phraseRobot){
+
+                divCreateElementRobot(divRobotHead,"robotHead",colorRobot)
+                divCreateElementRobot(divRobotEyeLeft,"robotEyeLeft",colorRobot)
+                divCreateElementRobot(divRobotEyeRight,"robotEyeRight",colorRobot)
+                divCreateElementRobot(divRobotMouth,"robotMouth",colorRobot)
+                divCreateElementRobot(divRobotMouthSpeak,"robotMouthSpeak",colorRobot)
+                divCreateElementRobotBody(divRobotBody,"robotBody",colorRobotBody)
+                divCreateElementRobot(divRobotHandLeft,"robotHandLeft",colorRobot)
+                divCreateElementRobot(divRobotHandRight,"robotHandRight",colorRobot)
+                divCreateElementRobot(divRobotLegLeft,"robotLegLeft",colorRobot)
+                divCreateElementRobot(divRobotLegRight,"robotLegRight",colorRobot)
+                divCreatElementfamaleRobotShelf(divfemaleRobotShelf,"femaleRobotShelf",colorRobotBody)
+                createElementRobotTitle(hRobotTitle,"title-robot1",titleRobotName)
+                creatElementRobotPhrase(pRobotRibon,"bubble",phraseRobot)
+                creatElementParagraphs(robotParagraphOne,"text1","Pskskdsds hk hkgh rt et ttere errer erre rer reerrer rererr rerrr rererr errrer errrererr rerrere errrer errrer rerrer ererre errere rer errer rerr errer erre er eer er eredksjdk tyty yttyyt tyty tyytty dfd dsdsdsds sdsdsd sdsdsd")
+                creatElementParagraphs(robotParagraphTwo,"text2","Bdsds  dssdsdsd sddsdsd sd sderrh fgrt eerer  ererrtr erre e r err")
+                creatElementParagraphs(robotParagraphThree,"text3","sdsdsd dssdsd ddsds")
+                robotImgInParagraph.className ="image-text3"
+                robotImgInParagraph.src = "C:/Users/Dell/Downloads/good luck.jpg"
+
+        }
+            
+            
+    // Function that adds the created elements for the robot to the DOM tree
+        function createSectionRobotForm(taypeRobot){
+              sections.appendChild(divRobotHead)
+              sections.appendChild(divRobotEyeLeft)
+              sections.appendChild(divRobotEyeRight)
+              sections.appendChild(divRobotMouth)
+              sections.appendChild(divRobotMouthSpeak)
+              sections.appendChild(divRobotBody)
+              sections.appendChild(divRobotHandLeft)
+              sections.appendChild(divRobotHandRight)
+              sections.appendChild(divRobotLegLeft)
+              sections.appendChild(divRobotLegRight)
+              sections.appendChild(hRobotTitle)
+
+              if (taypeRobot == "female") {
+                sections.appendChild(divfemaleRobotShelf)
+                sections.appendChild(pRobotRibon)
+              }else{
+                sections.appendChild(pRobotRibon)
+              }
+              
+              divTextWraper.appendChild(robotParagraphOne)
+              divTextWraper.appendChild(robotParagraphTwo)
+              divTextWraper.appendChild(robotParagraphThree)
+              robotParagraphThree.appendChild(robotImgInParagraph)
+        }
+
+    // Verification function phrase is cheked
+        function onChangeTextArea(checkboxCheck){
+            phrase.disabled = checkboxCheck.checked ? false : true;
+           
+        }
+
+    // Event listener on button name:"create" 
+        form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                let robotObject = [{}];
+                       robotObject = {name:`${name.value}`,
+                       tayp:`${selectEmptySpace.value}`,
+                       color:`${colorInput.value}`,
+                       phrase:`${ phrase.value}`
+                       }
+
+                   robotSlectionElementData(robotObject.color,
+                   robotObject.color,robotObject.name,robotObject.phrase)
+
+                     createSectionRobotForm(robotObject.tayp)
+                
+                       validateFormNameAlert(name,"Name can't be blank");
+                       validateFormSelectAlert(selectEmptySpace,"Please choose the type");
+                       validateFormInputColorAlert(colorInput,"Choose color")
+                       validateFormChekboxAlert(phrase,checkboxCheck,"Can't be blank")
+            
+               
+                      
+        });
+       // Validate alert composition  
+        let validateFormNameAlert = (clas,mesage)=>{
+                if ( clas.value.trim() == ""){
+                    errorMsgInputName.textContent= mesage;
+                    clas.style.border = "2px solid red";
+                }else{
+                    errorMsgInputName.textContent= "";
+                    clas.style.border = "2px solid green";
+                }
+        }
+        
+        let validateFormSelectAlert = (clas,mesage)=>{
+            if (clas.value == "") {
+                errorMsgSelectTayp.textContent = mesage; 
+                clas.style.border = "2px solid red";
+            }else{
+                errorMsgSelectTayp.textContent = ""
+                    clas.style.border = "2px solid green";
+                }
+        }
+
+        let validateFormInputColorAlert = (clas,mesage)=>{
+            if (clas.value == "#e96126") {
+                errorMsgSelectColor.textContent = mesage;
+                clas.style.border = "2px solid red";
+            }else{
+                errorMsgSelectColor.textContent="";
+                clas.style.border = "2px solid green";
+                }
+        }
+
+        let validateFormChekboxAlert =(clas,checkbox,mesage)=>{
+            if (checkbox.checked && clas.value=="") {
+                errorTextArea.textContent = mesage;
+                clas.style.border = "2px solid red";
+            }  
+        }
+      
+        
+    </script>
+    
+   
+
+</body> 
+</html>
