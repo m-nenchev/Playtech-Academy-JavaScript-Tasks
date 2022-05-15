@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Factory</title>
+
+    
+    <link rel="stylesheet" href="style.css">
+
+   </head>
+
+    <header class="header-title-robot-factory">
+        <div class="titles">
+          <h2 class="title-robot">Robot Factory</h2>
+            <a class="img-playtech" href="https://www.playtech.com/"><img class="img-playtech" src="C:\Users\Dell\Downloads\PTWebAcademy.JPG" alt="Trulli" width="50" height="33"></a>
+        </div>
+    </header>
+
+<body class="body">
+   <ul class="ulwraper" >
+       
+   </ul>
+  
+    <div>   
+        <button class="buttonPrevious" style="display: none">Previous</button><button class="buttonNext" style="display: none">Next</button>
+    </div>
+    <section id="slide-2" class="factory-section-2">
+        <div class="content-wrapper-2">
+            <h2 class="create-robot-title">Create Robot</h2>
+            <hr class="solid">
+        </div>
+        
+        <form id="formAtribut" class="form">
+            
+            <span class="span-name-input">
+              <label class="label-name" for="name">Name:</label>
+              <span class="errorInputName"></span>
+              <input class="input-name" type="text" id="name" name="name" placeholder="Robot name">
+            </span>
+          
+        <span class="span-select-tayp">
+            <label class="label-select-tayp" for="select-type">Type Robot</label>
+            <span class="errorSelectTayp"></span>
+            <select  class="select-tayp-selector" name="select-type"  >
+                <option class="empty-space" disabled selected value style="display:none"></option>
+                <option value="male">male</option>
+                <option value="female">female</option>
+            </select>
+
+        </span>
+        
+        <span class="span-input-selector-color">
+            <label class="label-selector-color" for="select-color">Select Color</label>
+            <span class="errorSelectColor"></span>
+            <input class="input-selector-color" type="color" id="select-color" name="select-color" value="#e96126">
+        </span> 
+
+        <span class="checkbox-wrapper">
+                  <label for="robot">Select options</label>
+                  <span class="error"></span>
+               <input  class="input-checkbox-jump" type="checkbox" name="robotJump" value="can jump">
+                  <label for="robot">can jump</label><br>
+
+               <input onChange="onChangeTextArea(this)" class="input-checkbox-talk" type="checkbox" name="robotTalk" value="talk">
+                  <label for="robot"> can talk</label><br>
+
+               <input class="inputCheckboxWinks" type="checkbox" name="robotWinks" value="winks" >
+                  <label for="robot"> can winks</label><br>
+        </span>
+           
+        <span class="textarea-wrapper">
+            <label for="text-area">Phrase</label>
+            <span class="errorTextArea"></span>
+            <textarea disabled="true" class="textarea" name="text-area" id="text-area" placeholder="Comment text..." cols="10" rows="10"></textarea>
+        </span>
+        
+        </form >
+            
+           <button type="submit" name="create" form="formAtribut" value="Submit" class="create-botton">Create</button>
+           <button class="show-created-robots-button">Show Created Robots</button>
+        <hr class="solid">
+        <div class="scoreDiv">
+
+        </div>
+  </section>
+
+    <script>
+        let classes = (classes) => document.querySelector(classes);
+    // Const  for validating instance variables 
+        const form = classes(".form"),
+              name = classes("input[name='name']"),
+              selectEmptySpace = classes(".select-tayp-selector"),
+              colorInput = classes(".input-selector-color"),
+              phrase = classes("textarea"),
+              checkboxCheck = classes("input[name='robotTalk']"),
+              checkboxJump = classes("input[name='robotJump']"),
+              checkboxWinks = classes("input[name='robotWinks']"),
+              errorMsgInputName = classes(".errorInputName"),
+              errorMsgSelectTayp = classes(".errorSelectTayp"),
+              errorMsgSelectColor = classes(".errorSelectColor"),
+              errorTextArea = classes(".errorTextArea")
+       
+             
+    // Const  for robot createlement instance variables   section id="slide-1" class="factory-section"
+        const liRobotFirstSectionChaild = document.createElement("li"),
+              liNew = document.createElement("li"),
+              inputJump = document.querySelector(".input-checkbox-jump"),
+              buttonNext = document.querySelector(".buttonNext"),
+              buttonPrevious= document.querySelector(".buttonPrevious"),
+              liWraper = document.querySelector(".ulwraper"),
+              divTextWraper = document.querySelector(".text-wrap"),
+              section2 = document.querySelector("#slide-2"),
+              liInstnc = document.querySelector(".liSectionForm ")
+             
+              
+          const buttonNextt = document.createElement("button"),
+                buttonPreviouss = document.createElement("button")
+
+           
+        function createElementRobotTitle(element,classNames,title,id){
+                 element.setAttribute("class",classNames);
+                 element.textContent = title;
+                 element.id = id
+        }  
+    
+        function creatElementRobotPhrase(element,classNames,phrase){
+            element.setAttribute("class",classNames);
+            element.textContent = phrase;
+        }
+    // Function for createElement robot body male   
+        function divCreateElementRobotBody(element,classNames,color,id){
+                element.setAttribute("class",classNames);
+                element.setAttribute("style",`border-top: 63px solid${color};`)
+                element.id = id
+        }
+    //  Function for createElement robot Skirt 
+        function divCreatElementfamaleRobotSkirt(element,classNames,color){
+            element.setAttribute("class",classNames);
+            element.setAttribute("style",`border-bottom: 34px solid ${color};`);
+            
+        }
+    // Function for createElement robot     
+        function divCreateElementRobot(element,classNames,color,id){
+                 element.setAttribute("class",classNames);
+                 element.setAttribute("style",`background-color:${color};`)
+                 element.id =id
+                 //element.cloneNode(true);
+              }
+    //Function for createElement robot three paragraphs in form robot      
+        function  creatElementParagraphs(element,classNames,title){
+            element.setAttribute("class",classNames);
+            element.textContent = title
+        }     
+   
+    // Verification function phrase is cheked checkbox "can talk"
+        function onChangeTextArea(checkboxCheck){
+            phrase.disabled = checkboxCheck.checked ? false : true;
+           
+        }
+        let textTalk;
+        function textTalkTable(){
+            if (checkboxCheck.checked) {
+                textTalk = "can Talk";
+            }else{
+                textTalk = "";
+            }
+        }
+    //    A function that performs the effect of "talking" to the ribbon and then stopping it
+        function talkEfectThenSecondsTime(taypeRobot,checkboxCheck,pRobotRibon,
+        divRobotBorder,divfemaleRobotSkirt,divRobotMouthSpeak){
+            
+            
+              if (taypeRobot == "female" && checkboxCheck.checked) {
+                divRobotBorder.appendChild(pRobotRibon)
+              }else if(taypeRobot == "male" && checkboxCheck.checked ){
+                divRobotBorder.appendChild(pRobotRibon)
+                
+              }
+               if(taypeRobot == "female"){
+                divRobotBorder.appendChild(divfemaleRobotSkirt)
+              }
+              let skrit = document.querySelector(".femaleRobotShelf")
+              // if (taypeRobot == "male"&& typeof(skrit)!= 'undefined' )  {
+               // divRobotBorder.removeChild(divfemaleRobotSkirt)
+             // }
+              if (checkboxCheck.checked) {
+                divRobotBorder.appendChild(divRobotMouthSpeak)
+                divRobotBorder.appendChild(pRobotRibon)
+                pRobotRibon.style.display = "block"   
+              }
+              // if no robot type is selected, an error occurs
+              if (checkboxCheck.checked) {
+                   setTimeout(function(){
+                   // divRobotBorder.removeChild(divRobotMouthSpeak)
+                   divRobotMouthSpeak.style.display = "none"
+                   pRobotRibon.style.display = "none"
+                    //divRobotBorder.removeChild(pRobotRibon)
+                   },10000)
+              }
+             
+        }
+        let textJump;
+        function jumpTextTable(){
+            if (checkboxJump.checked) {
+                textJump = "can jump";
+            }else{
+                textJump = "";
+            }
+        }
+    //A function that performs the effect of "jumping"    
+        function chekJump(checkboxJump,divRobotLegLeft,divRobotLegRight){
+                  if (checkboxJump.checked ) {
+                    divRobotLegLeft.classList.remove("robotLegLeft")
+                      divRobotLegLeft.classList.add('jumpingLeg');
+                      
+                      divRobotLegRight.classList.remove("robotLegRight")
+                      divRobotLegRight.classList.add("jumpingRight")
+                      
+                       
+                  }else{
+                    divRobotLegLeft.classList.remove("jumpingLeg");
+                    divRobotLegLeft.classList.add("robotLegLeft") 
+
+                      divRobotLegRight.classList.remove("jumpingRight");
+                      divRobotLegRight.classList.add("robotLegRight")
+                  }
+              }
+        let textWinks;
+        function textWinksTable(){
+            if (checkboxWinks.checked) {
+                textWinks = "can winks";
+            }else{
+                textWinks = "";
+            }
+        }
+    //   A function that performs the effect of "winking"       
+        function checkWinks(checkboxWinks,divRobotEyeLeft){
+          if (checkboxWinks.checked) {
+
+            divRobotEyeLeft.classList.remove("robotEyeLeft");
+            divRobotEyeLeft.classList.add("robotEyeLeftWinks");
+          }else{
+            divRobotEyeLeft.classList.remove("robotEyeLeftWinks");
+            divRobotEyeLeft.classList.add("robotEyeLeft");
+          }
+        }
+        let count = 0;
+        let items = [];
+   
+        let countIdRobot = 0;
+        let countButtonClick =0;
+        let robotObjectArray = [{}];
+        
+     
+       
+        function validateFirstButtonClick(countButtonClicks){
+            if (countButtonClicks >= 1) {
+                buttonNext.style.display = "block"
+                buttonPrevious.style.display = "block"
+            }else{
+                console.log("problem");
+            }
+        }
+
+        countupStyleVisible = 0;
+        let counteDownStyleVisible = 0;
+        
+        function createAllElementRobotSection(colorRobot,id,titleRobotName,colorRobotBody,
+        phraseRobot,taypeRobot){
+            
+            const form = classes(".form"),
+              name = classes("input[name='name']"),
+              selectEmptySpace = classes(".select-tayp-selector"),
+              colorInput = classes(".input-selector-color"),
+              phrase = classes("textarea"),
+              checkboxCheck = classes("input[name='robotTalk']"),
+              checkboxJump = classes("input[name='robotJump']"),
+              checkboxWinks = classes("input[name='robotWinks']"),
+              errorMsgInputName = classes(".errorInputName"),
+              errorMsgSelectTayp = classes(".errorSelectTayp"),
+              errorMsgSelectColor = classes(".errorSelectColor"),
+              errorTextArea = classes(".errorTextArea")
+
+            const liRobotFirstSectionChaild = document.createElement("li"),
+              sectionRobotFactory = document.createElement("section"),
+              h1TagNameRobot = document.createElement("h1"),
+              formWraper = document.createElement("form"),
+              divRobotBorder = document.createElement("div"),
+              divRobotParagrphForm = document.createElement("div"),
+              divRobotHead = document.createElement("div"),
+              divRobotEyeLeft = document.createElement("div"),
+              divRobotEyeRight = document.createElement("div"),
+              divRobotMouth = document.createElement("div"),
+              divRobotMouthSpeak = document.createElement("div"),
+              divRobotBody = document.createElement("div"),
+              divfemaleRobotSkirt = document.createElement("div"),
+              divRobotHandLeft = document.createElement("div"),
+              divRobotHandRight = document.createElement("div"),
+              divRobotLegLeft = document.createElement("div"),
+              divRobotLegRight = document.createElement("div"),
+              hRobotTitle = document.createElement("h4"),
+              pRobotRibon = document.createElement("p"),
+              robotParagraphOne = document.createElement("p"),
+              robotParagraphTwo = document.createElement("p"),
+              robotParagraphThree = document.createElement("p"),
+              robotImgInParagraph = document.createElement("img")
+
+              liRobotFirstSectionChaild.className = "liSectionForm"
+              sectionRobotFactory.className = "factory-section"
+              h1TagNameRobot.className = "basic-robot-title"
+               h1TagNameRobot.textContent = "Basic Robot"
+               divRobotBorder.className = "robot"
+               divRobotParagrphForm.className = "text-wrap"
+             formWraper.className = "content-wrapper"
+             liRobotFirstSectionChaild.id = id;
+              sectionRobotFactory.id = id;
+              h1TagNameRobot.id = id;
+              formWraper.id = id;
+              
+
+             divCreateElementRobot(divRobotHead,"robotHead",colorRobot,id)
+                divCreateElementRobot(divRobotEyeLeft,"robotEyeLeft",colorRobot,id)
+                divCreateElementRobot(divRobotEyeRight,"robotEyeRight",colorRobot,id)
+                divCreateElementRobot(divRobotMouth,"robotMouth",colorRobot,id)
+                divCreateElementRobot(divRobotMouthSpeak,"robotMouthSpeak",colorRobot,id)
+                divCreateElementRobotBody(divRobotBody,"robotBody",colorRobotBody,id)
+                divCreateElementRobot(divRobotHandLeft,"robotHandLeft",colorRobot,id)
+                divCreateElementRobot(divRobotHandRight,"robotHandRight",colorRobot,id)
+                divCreateElementRobot(divRobotLegLeft,"robotLegLeft",colorRobot,id)
+                divCreateElementRobot(divRobotLegRight,"robotLegRight",colorRobot,id)
+                divCreatElementfamaleRobotSkirt(divfemaleRobotSkirt,"femaleRobotShelf",colorRobotBody,id)
+                createElementRobotTitle(hRobotTitle,"title-robot1",titleRobotName,id)
+                creatElementRobotPhrase(pRobotRibon,"bubble",phraseRobot,id)
+               creatElementParagraphs(robotParagraphOne,"text1","Pskskdsds hk hkgh rt et ttere errer erre rer reerrer rererr rerrr rererr errrer errrererr rerrere errrer errrer rerrer ererre errere rer errer rerr errer erre er eer er eredksjdk tyty yttyyt tyty tyytty dfd dsdsdsds sdsdsd sdsdsd")
+                creatElementParagraphs(robotParagraphTwo,"text2","Bdsds  dssdsdsd sddsdsd sd sderrh fgrt eerer  ererrtr erre e r err")
+                creatElementParagraphs(robotParagraphThree,"text3","sdsdsd dssdsd ddsds")
+                robotImgInParagraph.className ="image-text3"
+                robotImgInParagraph.src = "C:/Users/Dell/Downloads/good luck.jpg"
+                
+                
+                liWraper.appendChild(liRobotFirstSectionChaild)
+              liRobotFirstSectionChaild.appendChild(sectionRobotFactory)
+              sectionRobotFactory.appendChild(h1TagNameRobot)
+              h1TagNameRobot.appendChild(formWraper)
+              formWraper.appendChild(divRobotBorder)
+              divRobotBorder.appendChild(divRobotHead)
+              
+              divRobotBorder.append(divRobotEyeLeft,divRobotEyeRight,divRobotMouth,divRobotBody,
+              divRobotHandLeft,divRobotHandRight,divRobotLegLeft,divRobotLegRight,hRobotTitle)
+              
+              formWraper.appendChild(divRobotParagrphForm)
+              divRobotParagrphForm.appendChild(robotParagraphOne)
+              divRobotParagrphForm.appendChild(robotParagraphTwo)
+              divRobotParagrphForm.appendChild(robotParagraphThree)
+              robotParagraphThree.appendChild(robotImgInParagraph)
+              
+              chekJump(checkboxJump,divRobotLegLeft,divRobotLegRight)
+              talkEfectThenSecondsTime(taypeRobot,checkboxCheck,pRobotRibon,
+             divRobotBorder,divfemaleRobotSkirt,divRobotMouthSpeak)
+              checkWinks(checkboxWinks,divRobotEyeLeft)
+              const slidess = Array.from(track.children)
+              
+              if (liRobotFirstSectionChaild.id >=2) {
+                  
+                    
+                
+                    countupStyleVisible++
+                    slidess[countupStyleVisible].style.visibility = "visible"
+                    slidess[countupStyleVisible].classList.add("curendSlide")
+
+                    slidess[counteDownStyleVisible].style.visibility = "hidden"
+                    slidess[counteDownStyleVisible].classList.remove("curendSlide")
+                    console.log(counteDownStyleVisible);
+                    counteDownStyleVisible++
+              
+            } 
+        }
+
+    // Event listener on button name:"create" 
+                form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                validateFirstButtonClick(countButtonClick)
+                
+    //functions initialize data options in teable            
+                jumpTextTable()
+                textTalkTable()
+                textWinksTable()
+                countIdRobot++
+                      let robotObject =[{}]
+                     robotObject = {id:`${countIdRobot}`,
+                       name:`${name.value}`,
+                       tayp:`${selectEmptySpace.value}`,
+                       color:`${colorInput.value}`,
+                       phrase:`${phrase.value}`,
+                       talk:`${textTalk}`,
+                       jump:`${textJump}`,
+                       winks:`${textWinks}`
+                       }
+                      do {
+                        robotObjectArray[countButtonClick] = robotObject;
+                      } while (1<1);
+                       
+                      countButtonClick++
+                      
+                      
+        // call function create object array for create section robot form          
+                       
+                       createAllElementRobotSection(robotObject.color,robotObject.id,robotObject.name,
+                       robotObject.color,robotObject.phrase,robotObject.tayp)
+                         
+                       });
+                       
+        const track = document.querySelector(".ulwraper")
+                     
+        buttonPrevious.addEventListener("click",(e)=>{
+            e.preventDefault()
+            
+            const slides = Array.from(track.children)
+             
+              const currentSlide = track.querySelector(".curendSlide")
+              currentSlide.style.visibility = "hidden";
+            const previslide = currentSlide.nextElementSibling;
+            const moveToSlide = (currentSlide,targetSlide)=>{
+                if (previslide !==null) {
+            track.style.transform = 'translateX(-'+targetSlide.style.left+')';
+            let countsClassName = slides.length
+        currentSlide.classList.remove("curendSlide");
+        
+        
+        targetSlide.classList.add("curendSlide")
+        targetSlide.style.visibility = "visible";
+       // currentSlide.style.display ="none"
+        //targetSlide.style.display = "block"
+         }else{
+            currentSlide.style.visibility = "visible";
+            
+                currentSlide
+            }
+        }
+            moveToSlide(currentSlide,previslide)
+           
+        })
+
+       
+        let countss = 0;
+        buttonNext.addEventListener("click", (e) =>{
+                e.preventDefault()
+                countss++
+                
+                console.log(track.children);
+              
+               console.log(track.children);
+        const slides = Array.from(track.children)
+          
+        const slidesWidth = 687.862//slides[0].getBoundingClientRect().width
+        console.log(slides);
+        const setSlidePosition = (slide,index)=>{
+            slide.style.left = slidesWidth * index + 'px';
+            
+        }
+        
+        slides.forEach(setSlidePosition)
+        
+        console.log(slides);
+        
+        const currentSlide = track.querySelector(".curendSlide")
+      
+        const nextSlide = currentSlide.previousElementSibling;
+        console.log(nextSlide);
+        currentSlide.style.visibility = "hidden";
+        const moveToSlide = (currentSlide,targetSlide)=>{
+            
+            if (nextSlide !==null) {
+                track.style.transform = 'translateX(-'+targetSlide.style.left+')';
+        console.log("dadada");
+        let countsClassName = slides.length
+        currentSlide.classList.remove("curendSlide");
+        
+       
+        
+        targetSlide.classList.add("curendSlide")
+        targetSlide.style.visibility = "visible";
+        //currentSlide.style.display ="none"
+       // targetSlide.style.display = "block"
+            }else{
+                currentSlide.style.visibility = "visible";
+                
+                currentSlide
+            }
+            
+        }
+        moveToSlide(currentSlide,nextSlide)
+        
+        
+        
+        })
+        
+       // Validate alert composition  
+        let validateFormNameAlert = (clas,mesage)=>{
+                if ( clas.value.trim() == ""){
+                    errorMsgInputName.textContent= mesage;
+                    clas.style.border = "2px solid red";
+                }else{
+                    errorMsgInputName.textContent= "";
+                    clas.style.border = "2px solid green";
+                }
+
+        }
+        
+        let validateFormSelectAlert = (clas,mesage)=>{
+            if (clas.value == "") {
+                errorMsgSelectTayp.textContent = mesage; 
+                clas.style.border = "2px solid red";
+            }else{
+                errorMsgSelectTayp.textContent = ""
+                    clas.style.border = "2px solid green";
+                }
+        }
+
+        let validateFormInputColorAlert = (clas,mesage)=>{
+            if (clas.value == "#e96126") {
+                errorMsgSelectColor.textContent = mesage;
+                clas.style.border = "2px solid red";
+            }else{
+                errorMsgSelectColor.textContent="";
+                clas.style.border = "2px solid green";
+                }
+        }
+
+        let validateFormChekboxAlert =(clas,checkbox,mesage)=>{
+            if (checkbox.checked && clas.value=="") {
+                errorTextArea.textContent = mesage;
+                clas.style.border = "2px solid red";
+            }  
+        }
+      
+        
+      
+      const buttonShowCreatedRobots = document.querySelector(".show-created-robots-button")
+
+        const scoreDiv = document.querySelector(".scoreDiv")
+        let tableHeaders = ["name","taype","color","options"]
+       
+        const createscoreBoardTable = () =>{
+            
+            console.log(robotObjectArray);
+            let robotCount = document.createElement("h3")
+            if (robotObjectArray[0]== ""||robotObjectArray[0]== undefined ) {
+
+                 robotCount.textContent = "No robots created yet"
+                 robotCount.className = "robotCount"
+            }else{
+
+               robotCount.className = "robotCount"
+               robotCount.textContent = `${countButtonClick} :robots found`
+            }
+// Remove all children from scoreboard div (if any)
+            while (scoreDiv.firstChild) scoreDiv.removeChild(scoreDiv.firstChild)
+       let scoreBoardTable = document.createElement("table")
+           scoreBoardTable.className = "scoreBoardTable"
+
+       let scoreBoardTableHead = document.createElement("thead")
+            scoreBoardTableHead.className = "scoreBoardTableHead"
+
+       let  scoreBoardTableHeaderRow = document.createElement("tr")
+            scoreBoardTableHeaderRow.className = "scoreBoardTableBodyRow"
+      tableHeaders.forEach(header =>{
+          let scoreHeader = document.createElement("th")
+              scoreHeader.textContent = header
+              scoreBoardTableHeaderRow.append(scoreHeader)
+      })
+      scoreBoardTableHead.append(scoreBoardTableHeaderRow)
+      scoreBoardTable.append(scoreBoardTableHead)
+      let scoreBoardTableBody = document.createElement("tbody")
+      scoreBoardTableBody.className = "scosreBoardTable-body"
+      scoreBoardTable.append(scoreBoardTableBody)
+      scoreDiv.append(robotCount)
+      scoreDiv.append(scoreBoardTable)
+    }
+    
+    const appendScores = (singleScore) => {
+        
+        const scoreBoardTable = document.querySelector(".scoreBoardTable")
+        let scoreBoardTableBodyRow = document.createElement('tr')
+        scoreBoardTableBodyRow.className = "scoreBoardTableBodyRow"
+       
+        let usernameData = document.createElement('td')
+        let hrefNameDataTag = document.createElement("a")
+            hrefNameDataTag.textContent = `${singleScore.name} ${singleScore.id}`
+           
+            hrefNameDataTag.href = `javascript:eventListenerNameDataTableRow(${singleScore.id});`
+            usernameData.append(hrefNameDataTag)
+        let tapyData = document.createElement("td")    
+            tapyData.textContent = singleScore.tayp
+            tapyData.className = "nameTableId"
+     
+
+        let colorData = document.createElement("td")
+        let colorInput = document.createElement("input")
+            colorInput.type = "color"
+            colorInput.value = singleScore.color
+            colorData.append(colorInput)
+            
+        let optionsData = document.createElement("td")
+            optionsData.textContent = `${singleScore.jump}, ${singleScore.winks}, ${singleScore.talk}`
+        
+            scoreBoardTableBodyRow.append(usernameData,tapyData,colorData,optionsData)
+            scoreBoardTable.append(scoreBoardTableBodyRow)
+    }
+    function eventListenerNameDataTableRow(currentId){
+        let sumari =Array.from(track.children)
+        const setAttributeSumari = (slide)=>{
+            slide.style.opacity = "0"
+        }
+        sumari.forEach(setAttributeSumari)
+        
+        
+        console.log(sumari);
+        function sarchArray(id){
+            return id.id == `b${currentId}`
+            
+         }
+          if (sumari.find(sarchArray)) {
+              let result = sumari.find(sarchArray)
+              track.style.transform = 'translateX(-'+result.style.left+')';
+              result.style.opacity = "1"
+              console.log(result);
+          }
+
+         console.log();
+         console.log("dadada");
+     
+    }
+    buttonShowCreatedRobots.addEventListener("click", (e)=>{
+     e.preventDefault()
+     createscoreBoardTable()
+     
+    
+
+     
+     for (const score of robotObjectArray) {
+        appendScores(score)
+     }
+     
+    })
+    </script>
+    
+  
+
+</body> 
+</html>
