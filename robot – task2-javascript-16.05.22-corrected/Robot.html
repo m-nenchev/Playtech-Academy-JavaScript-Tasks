@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Factory</title>
+
+    
+    <link rel="stylesheet" href="style.css">
+
+   </head>
+
+    <header class="header-title-robot-factory">
+        <div class="titles">
+          <h2 class="title-robot">Robot Factory</h2>
+            <a class="img-playtech" href="https://www.playtech.com/"><img class="img-playtech" src="C:\Users\Dell\Downloads\PTWebAcademy.JPG" alt="Trulli" width="50" height="33"></a>
+        </div>
+    </header>
+
+<body class="body">
+   <ul class="ulWraper">
+       
+   </ul>
+    <div>   
+        <button class="buttonPrevious" style="display: none">Previous</button><button class="buttonNext" style="display: none">Next</button>
+    </div>
+    <section id="slide-2" class="factory-section-2">
+        <div class="content-wrapper-2">
+            <h2 class="create-robot-title">Create Robot</h2>
+            <hr class="solid">
+        </div>
+        
+        <form id="formAtribut" class="form">
+            
+            <span class="span-name-input">
+              <label class="label-name" for="name">Name:</label>
+              <span class="errorInputName"></span>
+              <input class="input-name" type="text" id="name" name="name" placeholder="Robot name">
+            </span>
+          
+        <span class="span-select-tayp">
+            <label class="label-select-tayp" for="select-type">Type Robot</label>
+            <span class="errorSelectTayp"></span>
+            <select  class="select-tayp-selector" name="select-type"  >
+                <option class="empty-space" disabled selected value style="display:none"></option>
+                <option value="male">male</option>
+                <option value="female">female</option>
+            </select>
+
+        </span>
+        
+        <span class="span-input-selector-color">
+            <label class="label-selector-color" for="select-color">Select Color</label>
+            <span class="errorSelectColor"></span>
+            <input class="input-selector-color" type="color" id="select-color" name="select-color" value="#e96126">
+        </span> 
+
+        <span class="checkbox-wrapper">
+                  <label for="robot">Select options</label>
+                  <span class="error"></span>
+               <input  class="input-checkbox-jump" type="checkbox" name="robotJump" value="can jump">
+                  <label for="robot">can jump</label><br>
+
+               <input onChange="onChangeTextArea(this)" class="input-checkbox-talk" type="checkbox" name="robotTalk" value="talk">
+                  <label for="robot"> can talk</label><br>
+
+               <input class="inputCheckboxWinks" type="checkbox" name="robotWinks" value="winks" >
+                  <label for="robot"> can winks</label><br>
+        </span>
+           
+        <span class="textarea-wrapper">
+            <label for="text-area">Phrase</label>
+            <span class="errorTextArea"></span>
+            <textarea disabled="true" class="textarea" name="text-area" id="text-area" placeholder="Comment text..." cols="10" rows="10"></textarea>
+        </span>
+        
+        </form >
+            
+           <button type="submit" name="create" form="formAtribut" value="Submit" class="create-botton">Create</button>
+           <button class="show-created-robots-button">Show Created Robots</button>
+        <hr class="solid">
+        <div class="scoreDiv">
+
+        </div>
+  </section>
+
+    <script src="script.js">
+       
+    </script>
+    
+  
+
+</body> 
+</html>
