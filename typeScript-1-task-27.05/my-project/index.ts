@@ -32,10 +32,15 @@
               divRobotEyeLeft = document.querySelector(".robotEyeLeft")
           const ulWraper= document.querySelector(".ulWraper")as HTMLElement ;
           const messagesInputt = document.querySelector(".messageInput")as HTMLInputElement;
+
+          enum RobotType {
+            Male = "male",
+            Female = "female",
+          }
               interface robotUser{
                 id:number;  
                 name:string;
-                type?:string;
+                type?:RobotType;
                 color:string;
                 phrase:string;
                 talk:string;
